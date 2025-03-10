@@ -20,7 +20,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="max-w-2xl w-full p-6 bg-white shadow-lg rounded-xl">
+    <div className="max-w-3xl w-full p-6 bg-white shadow-lg rounded-xl">
       <h1 className="text-2xl font-bold mb-4 text-center">Available Quizzes</h1>
       {loading ? (
         <p className="text-center text-gray-500">Loading...</p>
