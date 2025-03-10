@@ -14,9 +14,9 @@ function App() {
       <div className="min-h-screen bg-gray-100 flex justify-center items-center">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/quiz/:quizId" element={<QuizPage />} />
+          <Route path="/quiz/:id" element={<QuizPage />} />
           <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/quiz/:quizId" element={<ManageQuiz />} />
+          <Route path="/admin/quiz/:id" element={<ManageQuiz />} />
           <Route path="/admin/question/new" element={<ManageQuestion />} />  {/* Add Question */}
           <Route path="/admin/question/:id" element={<ManageQuestion />} />  {/* Edit Question */}
         </Routes>

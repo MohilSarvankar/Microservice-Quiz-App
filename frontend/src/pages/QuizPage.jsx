@@ -4,7 +4,7 @@ import axios from "axios";
 import QuizResultModal from "../components/QuizResultModal";
 
 const QuizPage = () => {
-    const { quizId } = useParams();
+    const { id } = useParams();
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState({});
     const [loading, setLoading] = useState(true);
@@ -12,7 +12,7 @@ const QuizPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:8090/quiz/${quizId}/questions`)
+        axios.get(`http://localhost:8090/quiz/${id}/questions`)
             .then(response => {
                 setQuestions(response.data);
                 setLoading(false);
@@ -21,7 +21,7 @@ const QuizPage = () => {
                 console.error("Error fetching questions:", error);
                 setLoading(false);
             });
-    }, [quizId]);
+    }, [id]);
 
     const handleOptionChange = (questionId, option) => {
         setAnswers(prevAnswers => ({
@@ -36,7 +36,7 @@ const QuizPage = () => {
             response
         }));
 
-        axios.post(`http://localhost:8090/quiz/${quizId}/submit`, quizResponses)
+        axios.post(`http://localhost:8090/quiz/${id}/submit`, quizResponses)
             .then(response => {
                 // alert(`You scored: ${response.data}`);
                 setScore(response.data);
@@ -51,7 +51,7 @@ const QuizPage = () => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
             <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-6">
-                <h2 className="text-2xl font-bold text-center mb-6">Quiz {quizId}</h2>
+                <h2 className="text-2xl font-bold text-center mb-6">Quiz {id}</h2>
                 {questions.map((question) => (
                     <div key={question.id} className="mb-6 border-b pb-4">
                         <h3 className="text-lg font-semibold mb-2">{question.questionTitle}</h3>
