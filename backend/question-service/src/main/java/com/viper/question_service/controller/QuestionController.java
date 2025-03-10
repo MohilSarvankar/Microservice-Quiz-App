@@ -43,12 +43,12 @@ public class QuestionController {
 		return questionService.getQuestionsByCategory(category);
 	}
 	
-	@PostMapping("/")
+	@PostMapping
 	public ResponseEntity<String> addQuestion(@RequestBody Question question) {
 		return questionService.addQuestion(question);
 	}
 	
-	@PutMapping("/")
+	@PutMapping
 	public ResponseEntity<String> updateQuestion(@RequestBody Question question) {
 		return questionService.updateQuestion(question);
 	}
