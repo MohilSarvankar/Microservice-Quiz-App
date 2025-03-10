@@ -28,6 +28,21 @@ public class QuestionService {
 		}
 		return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	
+	public ResponseEntity<Question> getQuestion(int questionId) {
+		try {
+			Question question = repo.findById(questionId).orElse(null);
+			if(question == null) {
+				return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>(question ,HttpStatus.OK);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 
 
 	public ResponseEntity<List<Question>>  getQuestionsByCategory(String category) {
