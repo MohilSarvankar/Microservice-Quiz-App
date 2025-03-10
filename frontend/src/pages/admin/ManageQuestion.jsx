@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import AdminModal from "../../components/AdminModal";
 
 const ManageQuestion = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [maintenanceDone, setMaintenanceDone] = useState(false);
   
   const [question, setQuestion] = useState({
     questionTitle: "",
@@ -32,11 +34,11 @@ const ManageQuestion = () => {
   const handleSubmit = () => {
     if (id) {
       axios.put(`${process.env.REACT_APP_API_QUESTION_URL}`, question)
-        .then(() => navigate("/admin"))
+        .then(() => setMaintenanceDone(true))
         .catch(error => console.error("Error updating question:", error));
     } else {
       axios.post(`${process.env.REACT_APP_API_QUESTION_URL}`, question)
-        .then(() => navigate("/admin"))
+        .then(() => setMaintenanceDone(true))
         .catch(error => console.error("Error adding question:", error));
     }
   };
@@ -99,6 +101,8 @@ const ManageQuestion = () => {
       <button onClick={handleSubmit} className="bg-blue-500 text-white px-4 py-2 rounded">
         {id ? "Update" : "Add"} Question
       </button>
+
+      {maintenanceDone && <AdminModal message={ id ? "Question updated successfully" : "Question added successfully"} navigateTo="/admin"/>}
     </div>
   );
 };
