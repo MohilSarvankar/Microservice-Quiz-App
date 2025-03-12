@@ -40,6 +40,15 @@ const AdminDashboard = () => {
     }
   }
 
+  const handleDeleteQuiz = async (id) => {
+    try {
+      const response = await axios.delete(`${process.env.REACT_APP_API_QUIZ_URL}/${id}`);
+      setQuizzes(quizzes.filter(q => q.id != id));
+    } catch (error) {
+      console.error("Error deleting question: ", error);
+    }
+  }
+
   return (
     <div className="w-full min-h-screen m-5 p-4 bg-white shadow-lg rounded-lg">
       <h1 className="text-2xl font-bold text-center mb-4">Admin Dashboard</h1>
@@ -77,7 +86,7 @@ const AdminDashboard = () => {
             <tr key={quiz.id} className="border-b hover:bg-gray-100">
               <td className="py-2 px-4">{quiz.title}</td>
               <td className="py-2 px-4 text-center">
-                <button className="bg-red-500 text-white px-3 py-1 rounded">Delete</button>
+                <button className="bg-red-500 text-white px-3 py-1 rounded" onClick={() => handleDeleteQuiz(quiz.id)}>Delete</button>
               </td>
             </tr>
           ))}
