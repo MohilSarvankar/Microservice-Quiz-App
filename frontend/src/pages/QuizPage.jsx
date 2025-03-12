@@ -12,7 +12,7 @@ const QuizPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:8090/quiz/${id}/questions`)
+        axios.get(`${process.env.REACT_APP_API_QUIZ_URL}/${id}/questions`)
             .then(response => {
                 setQuestions(response.data);
                 setLoading(false);
@@ -36,7 +36,7 @@ const QuizPage = () => {
             response
         }));
 
-        axios.post(`http://localhost:8090/quiz/${id}/submit`, quizResponses)
+        axios.post(`${process.env.REACT_APP_API_QUIZ_URL}/${id}/submit`, quizResponses)
             .then(response => {
                 // alert(`You scored: ${response.data}`);
                 setScore(response.data);

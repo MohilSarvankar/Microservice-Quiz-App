@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -10,6 +10,21 @@ const ManageQuiz = () => {
     });
 
     const navigate = useNavigate();
+    const [categories, setCategories] = useState([]); 
+
+    // Fetch categories from API
+    useEffect(() => {
+      const fetchCategories = async () => {
+          try {
+              const response = await axios.get(`${process.env.REACT_APP_API_QUESTION_URL}/categories`);
+              setCategories(response.data);
+          } catch (error) {
+              console.error("Error fetching categories:", error);
+          }
+      };
+
+      fetchCategories();
+    }, []);
 
     const handleChange = (e) => {
         setQuizData({ ...quizData, [e.target.name]: e.target.value });
@@ -24,7 +39,7 @@ const ManageQuiz = () => {
         }
 
         try {
-            const response = await axios.post("http://localhost:8090/quiz/create", quizData);
+            const response = await axios.post(`${process.env.REACT_APP_API_QUIZ_URL}/create`, quizData);
             alert("Quiz created successfully!");
             navigate("/admin"); // Redirect back to Admin Dashboard
         } catch (error) {
@@ -52,14 +67,19 @@ const ManageQuiz = () => {
 
                 {/* Category Input */}
                 <div>
-                    <input
-                        type="text"
+                    <select
                         name="category"
                         value={quizData.category}
                         onChange={handleChange}
                         className="w-full p-2 border rounded-md"
-                        placeholder="Quiz category"
-                    />
+                    >
+                        <option value="">Select Category</option>
+                        {categories.map((cat, index) => (
+                            <option key={index} value={cat}>
+                                {cat}
+                            </option>
+                        ))}
+                    </select>
                 </div>
 
                 {/* Number of Questions Input */}
