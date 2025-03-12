@@ -91,6 +91,18 @@ public class QuestionService {
 		return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	
+	public ResponseEntity<List<String>> getAllCategories() {
+		try{
+			List<String> categories = repo.findAllCategories();
+			return new ResponseEntity<>(categories,HttpStatus.OK);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 
 	public ResponseEntity<List<Integer>> getQuestionsForQuiz(String category, int noOfQuestions) {
 		try{

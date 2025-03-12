@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.viper.question_service.model.Question;
@@ -61,6 +60,11 @@ public class QuestionController {
 	@DeleteMapping("/{questionId}")
 	public ResponseEntity<String> deleteQuestion(@PathVariable int questionId) {
 		return questionService.deleteQuestion(questionId);
+	}
+	
+	@GetMapping("/categories")
+	public ResponseEntity<List<String>> getAllCategories(){
+		return questionService.getAllCategories();
 	}
 	
 	//Extra things to make this a microservice
