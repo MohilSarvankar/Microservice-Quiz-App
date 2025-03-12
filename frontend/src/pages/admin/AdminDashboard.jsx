@@ -63,7 +63,7 @@ const AdminDashboard = () => {
       {/* Quizzes Tab */}
       {activeTab === "quizzes" && (
   <div>
-    <button className="bg-green-500 text-white px-4 py-2 rounded mb-4">+ Create New Quiz</button>
+    <button className="bg-green-500 text-white px-4 py-2 rounded mb-4" onClick={() => navigate("/admin/quiz/new")}>+ Create New Quiz</button>
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white border border-gray-300 shadow-md rounded-lg">
         <thead className="bg-gray-200">

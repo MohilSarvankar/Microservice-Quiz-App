@@ -16,7 +16,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/quiz/:id" element={<QuizPage />} />
           <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/quiz/:id" element={<ManageQuiz />} />
+          <Route path="/admin/quiz/new" element={<ManageQuiz />} />
           <Route path="/admin/question/new" element={<ManageQuestion />} />  {/* Add Question */}
           <Route path="/admin/question/:id" element={<ManageQuestion />} />  {/* Edit Question */}
         </Routes>
