@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +41,11 @@ public class QuizController {
 //	public ResponseEntity<Quiz> getQuiz(@PathVariable int quizId){
 //		return quizService.getQuiz(quizId);
 //	}
+	
+	@DeleteMapping("/{quizId}")
+	public ResponseEntity<String> deleteQuiz(@PathVariable int quizId){
+		return quizService.deleteQuiz(quizId);
+	}
 	
 	@GetMapping("/{quizId}/questions")
 	public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(@PathVariable int quizId){

@@ -90,5 +90,17 @@ public class QuizService {
 		}
 		return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	
+	public ResponseEntity<String> deleteQuiz(int quizId) {
+		try{
+			quizRepo.deleteById(quizId);					
+			return new ResponseEntity<>("Quiz deleted successfully", HttpStatus.OK);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 
 }
