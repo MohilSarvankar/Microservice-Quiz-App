@@ -16,7 +16,7 @@ Admins can manage quizzes and questions, while users can attempt quizzes and vie
 
 **Client:** React, TailwindCSS, Axios (for API calls), React Router
 
-**Server:** Spring Boot, Spring Data JPA (Hibernate), PostgreSql (Database)
+**Server:** Spring Boot, Spring Data JPA (Hibernate), Spring Cloud Gateway (API gateway and load balancing), PostgreSql (Database)
 
 
 ## Installation and Setup
@@ -34,14 +34,14 @@ Admins can manage quizzes and questions, while users can attempt quizzes and vie
 
 - Create databses named quizdb and questiondb in postgreSQL using pgAdmin.
 
-- Open service-registry, question-service and quiz-service in eclipse and make sure all the mvn dependencies are installed.
+- Open service-registry, question-service, quiz-service and gateway-service in eclipse and make sure all the mvn dependencies are installed.
 
 - Configure PostgreSQL database in application.properties in quiz-service and question-service
     ```properties
     spring.datasource.username=your_db_username
     spring.datasource.password=your_db_password
 
-- Run service-registry, question-service and quiz-service.
+- Run service-registry, question-service, quiz-service and gateway-service.
 
 ### Frontend Setup
 - Install node dependnecies.
