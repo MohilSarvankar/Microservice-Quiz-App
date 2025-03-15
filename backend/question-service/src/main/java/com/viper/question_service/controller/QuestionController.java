@@ -23,7 +23,6 @@ import com.viper.question_service.service.QuestionService;
 
 @RestController
 @RequestMapping("/question")
-@CrossOrigin
 public class QuestionController {
 	
 	@Autowired

@@ -21,7 +21,6 @@ import com.viper.quiz_service.service.QuizService;
 
 @RestController
 @RequestMapping("/quiz")
-@CrossOrigin
 public class QuizController {
 	
 	@Autowired
