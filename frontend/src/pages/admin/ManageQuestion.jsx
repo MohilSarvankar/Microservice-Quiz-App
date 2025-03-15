@@ -21,7 +21,7 @@ const ManageQuestion = () => {
 
   useEffect(() => {
     if (id) {
-      axios.get(`${process.env.REACT_APP_API_QUESTION_URL}/${id}`)
+      axios.get(`${process.env.REACT_APP_API_URL}/question-service/question/${id}`)
         .then(response => setQuestion(response.data))
         .catch(error => console.error("Error fetching question:", error));
     }
@@ -33,11 +33,11 @@ const ManageQuestion = () => {
 
   const handleSubmit = () => {
     if (id) {
-      axios.put(`${process.env.REACT_APP_API_QUESTION_URL}`, question)
+      axios.put(`${process.env.REACT_APP_API_URL}/question-service/question`, question)
         .then(() => setMaintenanceDone(true))
         .catch(error => console.error("Error updating question:", error));
     } else {
-      axios.post(`${process.env.REACT_APP_API_QUESTION_URL}`, question)
+      axios.post(`${process.env.REACT_APP_API_URL}/question-service/question`, question)
         .then(() => setMaintenanceDone(true))
         .catch(error => console.error("Error adding question:", error));
     }

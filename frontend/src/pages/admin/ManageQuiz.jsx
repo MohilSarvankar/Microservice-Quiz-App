@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import AdminModal from "../../components/AdminModal";
 
 const ManageQuiz = () => {
     const [quizData, setQuizData] = useState({
@@ -9,14 +9,14 @@ const ManageQuiz = () => {
         noOfQuestions: "",
     });
 
-    const navigate = useNavigate();
     const [categories, setCategories] = useState([]); 
+    const [quizCreated, setQuizCreated] = useState(false);
 
     // Fetch categories from API
     useEffect(() => {
       const fetchCategories = async () => {
           try {
-              const response = await axios.get(`${process.env.REACT_APP_API_QUESTION_URL}/categories`);
+              const response = await axios.get(`${process.env.REACT_APP_API_URL}/question-service/question/categories`);
               setCategories(response.data);
           } catch (error) {
               console.error("Error fetching categories:", error);
@@ -39,9 +39,8 @@ const ManageQuiz = () => {
         }
 
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_QUIZ_URL}/create`, quizData);
-            alert("Quiz created successfully!");
-            navigate("/admin"); // Redirect back to Admin Dashboard
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/quiz-service/quiz/create`, quizData);
+            setQuizCreated(true);
         } catch (error) {
             console.error("Error creating quiz:", error);
             alert("Failed to create quiz. Please try again.");
@@ -102,6 +101,8 @@ const ManageQuiz = () => {
                     Create Quiz
                 </button>
             </form>
+
+            {quizCreated && <AdminModal message={ "Quiz created successfully"} navigateTo="/admin"/>}
         </div>
     );
 };

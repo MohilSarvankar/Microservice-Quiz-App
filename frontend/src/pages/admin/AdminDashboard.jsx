@@ -15,7 +15,7 @@ const AdminDashboard = () => {
 
   const fetchQuizzes = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_QUIZ_URL}/all`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/quiz-service/quiz/all`);
       setQuizzes(response.data);
     } catch (error) {
       console.error("Error fetching quizzes:", error);
@@ -24,7 +24,7 @@ const AdminDashboard = () => {
 
   const fetchQuestions = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_QUESTION_URL}/all`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/question-service/question/all`);
       setQuestions(response.data);
     } catch (error) {
       console.error("Error fetching questions:", error);
@@ -33,7 +33,7 @@ const AdminDashboard = () => {
 
   const handleDeleteQuestion = async (id) => {
     try {
-      const response = await axios.delete(`${process.env.REACT_APP_API_QUESTION_URL}/${id}`);
+      const response = await axios.delete(`${process.env.REACT_APP_API_URL}/question-service/question/${id}`);
       setQuestions(questions.filter(q => q.id != id));
     } catch (error) {
       console.error("Error deleting question: ", error);
@@ -42,7 +42,7 @@ const AdminDashboard = () => {
 
   const handleDeleteQuiz = async (id) => {
     try {
-      const response = await axios.delete(`${process.env.REACT_APP_API_QUIZ_URL}/${id}`);
+      const response = await axios.delete(`${process.env.REACT_APP_API_URL}/quiz-service/quiz/${id}`);
       setQuizzes(quizzes.filter(q => q.id != id));
     } catch (error) {
       console.error("Error deleting question: ", error);

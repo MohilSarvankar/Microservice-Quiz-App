@@ -8,7 +8,7 @@ const HomePage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_QUIZ_URL}/all`)
+    axios.get(`${process.env.REACT_APP_API_URL}/quiz-service/quiz/all`)
       .then(response => {
         setQuizzes(response.data);
         setLoading(false);
