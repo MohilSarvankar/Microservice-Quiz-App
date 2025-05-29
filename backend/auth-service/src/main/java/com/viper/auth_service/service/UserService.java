@@ -1,6 +1,5 @@
 package com.viper.auth_service.service;
 
-import java.util.Collection;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,6 +23,9 @@ public class UserService {
 	
 	@Autowired
 	private AuthenticationManager authManager;
+	
+	@Autowired
+	private JwtService jwtService;
 	
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
 
@@ -53,7 +54,7 @@ public class UserService {
 				Collections.singleton(new SimpleGrantedAuthority(user.getRole().toString()))));
 		
 		if(authentication.isAuthenticated())
-			return new ResponseEntity<>("Success", HttpStatus.OK);
+			return new ResponseEntity<>(jwtService.getToken(user.getName()), HttpStatus.OK);
 			
 		return new ResponseEntity<>("Failure", HttpStatus.UNAUTHORIZED);
 	}
