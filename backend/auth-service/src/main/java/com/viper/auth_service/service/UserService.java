@@ -50,11 +50,10 @@ public class UserService {
 	public ResponseEntity<String> verify(Users user) {
 		Authentication authentication =
 		authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getName(), 
-				user.getPassword(),
-				Collections.singleton(new SimpleGrantedAuthority(user.getRole().toString()))));
+				user.getPassword()));
 		
 		if(authentication.isAuthenticated())
-			return new ResponseEntity<>(jwtService.getToken(user.getName()), HttpStatus.OK);
+			return new ResponseEntity<>(jwtService.getToken(user), HttpStatus.OK);
 			
 		return new ResponseEntity<>("Failure", HttpStatus.UNAUTHORIZED);
 	}

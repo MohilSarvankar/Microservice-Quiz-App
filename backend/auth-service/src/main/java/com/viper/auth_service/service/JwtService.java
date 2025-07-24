@@ -12,6 +12,8 @@ import javax.crypto.SecretKey;
 
 import org.springframework.stereotype.Service;
 
+import com.viper.auth_service.model.Users;
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
@@ -30,12 +32,14 @@ public class JwtService {
 		}
 	}
 
-	public String getToken(String username) {
+	public String getToken(Users user) {
 		Map<String, Object> map = new HashMap<>();
+		map.put("role", user.getRole());
+		
 		return Jwts.builder()
 				   .claims()
 				   .add(map)
-				   .subject(username)
+				   .subject(user.getName())
 				   .issuedAt(new Date(System.currentTimeMillis()))
 				   .expiration(new Date(System.currentTimeMillis() + 1000*60*60))
 				   .and()
